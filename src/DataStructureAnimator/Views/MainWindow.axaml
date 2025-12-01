@@ -1,0 +1,133 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:DataStructureAnimator.ViewModels"
+        xmlns:controls="using:DataStructureAnimator.Controls"
+        x:Class="DataStructureAnimator.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Title="Visual Data Structure Animator"
+        Width="1200"
+        Height="800"
+        MinWidth="900"
+        MinHeight="600"
+        Background="#1E1E2E">
+
+    <Window.Styles>
+        <Style Selector="TextBlock">
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style Selector="ComboBox">
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+    </Window.Styles>
+
+    <Grid RowDefinitions="Auto,*,Auto">
+        <!-- Header / Controls Panel -->
+        <Border Grid.Row="0" Background="#2D2D3D" Padding="16">
+            <Grid ColumnDefinitions="Auto,Auto,Auto,*,Auto">
+                <!-- Data Structure Selection -->
+                <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10">
+                    <TextBlock Text="Data Structure:" VerticalAlignment="Center" FontWeight="Bold"/>
+                    <ComboBox ItemsSource="{Binding DataStructures}"
+                              SelectedItem="{Binding SelectedDataStructure}"
+                              Width="150"/>
+                </StackPanel>
+
+                <!-- Operation Selection -->
+                <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="10" Margin="20,0,0,0">
+                    <TextBlock Text="Operation:" VerticalAlignment="Center" FontWeight="Bold"/>
+                    <ComboBox ItemsSource="{Binding Operations}"
+                              SelectedItem="{Binding SelectedOperation}"
+                              Width="150"/>
+                </StackPanel>
+
+                <!-- Input Fields -->
+                <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="10" Margin="20,0,0,0">
+                    <TextBlock Text="Value:" VerticalAlignment="Center"/>
+                    <TextBox Text="{Binding InputValue}" Width="80" Watermark="Value"/>
+                    
+                    <TextBlock Text="Initial Values:" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                    <TextBox Text="{Binding InputValues}" Width="200" Watermark="e.g., 5, 3, 8, 1"/>
+                    
+                    <Button Content="Initialize" Command="{Binding InitializeCommand}" 
+                            Classes="primary" Margin="10,0,0,0"/>
+                </StackPanel>
+
+                <!-- Speed Control -->
+                <StackPanel Grid.Column="4" Orientation="Horizontal" Spacing="10">
+                    <TextBlock Text="Speed:" VerticalAlignment="Center"/>
+                    <Slider Value="{Binding AnimationSpeed}" 
+                            Minimum="0.25" Maximum="4" Width="100"
+                            VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding AnimationSpeed, StringFormat={}{0:F2}x}" 
+                               VerticalAlignment="Center" Width="40"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Main Canvas Area -->
+        <Grid Grid.Row="1">
+            <Border Background="#1E1E2E" Margin="16" CornerRadius="8">
+                <controls:DataStructureCanvas x:Name="Canvas"
+                                              DataStructure="{Binding DataStructure}"/>
+            </Border>
+
+            <!-- Animation Description Overlay -->
+            <Border Background="#3D3D4D" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Top"
+                    Margin="0,30,0,0"
+                    Padding="20,10"
+                    CornerRadius="8"
+                    IsVisible="{Binding AnimationDescription, Converter={x:Static StringConverters.IsNotNullOrEmpty}}">
+                <TextBlock Text="{Binding AnimationDescription}" 
+                           FontSize="16" 
+                           Foreground="White"/>
+            </Border>
+        </Grid>
+
+        <!-- Bottom Control Bar -->
+        <Border Grid.Row="2" Background="#2D2D3D" Padding="16">
+            <Grid ColumnDefinitions="Auto,*,Auto">
+                <!-- Animation Controls -->
+                <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10">
+                    <Button Content="▶ Run" Command="{Binding RunAnimationCommand}"
+                            IsEnabled="{Binding !IsAnimating}"
+                            Classes="primary"/>
+                    <Button Content="⏸ Pause" Command="{Binding PauseAnimationCommand}"
+                            IsEnabled="{Binding IsAnimating}"
+                            Classes="secondary"/>
+                    <Button Content="⏹ Stop" Command="{Binding StopAnimationCommand}"
+                            IsEnabled="{Binding IsAnimating}"
+                            Classes="secondary"/>
+                    <Button Content="⏭ Step" Command="{Binding StepForwardCommand}"
+                            Classes="secondary"/>
+                    <Button Content="↺ Reset" Command="{Binding ResetAnimationCommand}"
+                            Classes="secondary"/>
+                </StackPanel>
+
+                <!-- Progress -->
+                <StackPanel Grid.Column="1" Orientation="Horizontal" 
+                            HorizontalAlignment="Center" Spacing="10">
+                    <TextBlock Text="Step:" VerticalAlignment="Center"/>
+                    <TextBlock VerticalAlignment="Center">
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0} / {1}">
+                                <Binding Path="CurrentStep"/>
+                                <Binding Path="TotalSteps"/>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                    <ProgressBar Value="{Binding CurrentStep}" 
+                                 Maximum="{Binding TotalSteps}"
+                                 Width="200" Height="8"
+                                 VerticalAlignment="Center"/>
+                </StackPanel>
+
+                <!-- Status -->
+                <TextBlock Grid.Column="2" Text="{Binding StatusMessage}" 
+                           VerticalAlignment="Center" 
+                           Foreground="#A0A0B0"/>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
