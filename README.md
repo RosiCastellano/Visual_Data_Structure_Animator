@@ -1,4 +1,4 @@
-# 🎨 Visual Data Structure Animator
+# Visual Data Structure Animator
 
 A beautiful, cross-platform desktop application for visualizing and animating common data structures and algorithms. Built with C# and Avalonia UI, it works on **macOS**, **Windows**, and **Linux**.
 
@@ -6,7 +6,7 @@ A beautiful, cross-platform desktop application for visualizing and animating co
 ![Avalonia](https://img.shields.io/badge/Avalonia-11.1-purple?style=flat-square)
 ![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
 
-## ✨ Features
+## Features
 
 ### Data Structures
 - **Arrays** - Visualize array operations with sorting algorithms
@@ -29,7 +29,7 @@ A beautiful, cross-platform desktop application for visualizing and animating co
 - 🔄 Speed control (0.25x - 4x)
 - ↺ Reset to initial state
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -94,7 +94,7 @@ dotnet publish -c Release -r linux-x64    # Linux
 4. Select "Build Tree" and click "Run"
 5. Watch the tree construction step by step!
 
-## 🏗️ Project Structure
+## Project Structure
 
 ```
 DataStructureAnimator/
@@ -153,11 +153,11 @@ Contributions are welcome! Here's how you can help:
 - [ ] Export animation as GIF
 - [ ] Add code panel showing algorithm pseudocode
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - [Avalonia UI](https://avaloniaui.net/) for the amazing cross-platform framework
 - Inspired by various algorithm visualization tools like VisuAlgo and Algorithm Visualizer
