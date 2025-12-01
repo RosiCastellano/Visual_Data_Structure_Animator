@@ -67,7 +67,7 @@ dotnet publish -c Release -r win-x64      # Windows
 dotnet publish -c Release -r linux-x64    # Linux
 ```
 
-## 📖 Usage Guide
+## Usage Guide
 
 ### Basic Workflow
 
@@ -116,7 +116,7 @@ DataStructureAnimator/
 └── README.md
 ```
 
-## 🎯 Architecture
+## Architecture
 
 The application follows the **MVVM (Model-View-ViewModel)** pattern:
 
@@ -126,14 +126,14 @@ The application follows the **MVVM (Model-View-ViewModel)** pattern:
 - **Animation Engine** - Manages step-by-step animations
 - **Data Structures** - Implement `IAnimatableDataStructure` for consistent visualization
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 - **UI Framework**: [Avalonia UI](https://avaloniaui.net/) - Cross-platform .NET UI framework
 - **MVVM Toolkit**: [CommunityToolkit.Mvvm](https://github.com/CommunityToolkit/dotnet) - Source generators for MVVM
 - **Reactive Extensions**: [Avalonia.ReactiveUI](https://www.reactiveui.net/) - Reactive programming support
 - **Language**: C# 12 with .NET 8
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Here's how you can help:
 
